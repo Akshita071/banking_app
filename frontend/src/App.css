@@ -1,38 +1,272 @@
+/* src/App.css */
+
+/* --- Basic Resets & Body --- */
+body {
+  margin: 0; /* Redundant with index.css but safe */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34; /* Main dark background */
+  color: white;
+  /* REMOVE display:flex and centering from body */
+  /* width: 100%; */ /* Not usually needed */
+}
+
+/* Remove default Vite/CRA centering if #root exists */
+#root {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left; /* Keep text-align reset */
+  width: 100%; /* Ensure root takes full width */
+}
+
+/* --- App Layout (Flexbox for structure inside #root) --- */
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%; /* Ensure App fills the root */
+}
+
+.App-content {
+  flex-grow: 1; /* Makes content area fill space between header/footer */
+  width: 100%; /* Ensure content area takes full width */
+  padding-top: 70px; /* Example: Approx height of header + padding */
+  padding-bottom: 70px; /* Example: Approx height of footer + padding */
+  box-sizing: border-box; /* Include padding in height calculation */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center block content */
+}
+
+/* --- Header Styles --- */
+.app-header {
+  /* display: flex; <-- Not needed if using .header-content */
+  background-color: #20232a;
+  /* Use header text color, not #aaa */
+  color: white;
+  padding: 15px 30px; /* Adjusted padding */
+  /* margin-top: auto; <-- REMOVE, conflicts with fixed */
+  /* text-align: left; <-- Inherited */
+  /* font-size: 0.9em; <-- Remove, use default */
+  /* border-top: 1px solid #3a3f4a; <-- Remove, this is footer style */
+  position: fixed; /* Keep fixed */
+  top: 0;
+  left: 0; /* Add left: 0 */
+  width: 100%; /* Use width: 100% instead of right:0 */
+  z-index: 1000; /* Ensure it's on top */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%; /* Ensure content takes width */
+  margin: 0 auto; /* Center content within header */
+}
+
+.logo-title { display: flex; align-items: center; }
+.logo-title h1 { margin: 0 0 0 15px; font-size: 1.6em; color: #61dafb; }
+.logo-placeholder { font-weight: bold; color: #61dafb; display: inline-block; padding: 5px; border: 1px solid #61dafb; border-radius: 4px; }
+.main-nav a { color: #ccc; text-decoration: none; margin-left: 25px; font-size: 1em; transition: color 0.2s ease; }
+.main-nav a:hover { color: #61dafb; }
+
+/* --- Footer Styles --- */
+.app-footer {
+  background-color: #20232a;
+  color: #aaa;
+  padding: 20px 30px;
+  /* margin-top: auto; <-- REMOVE, using fixed */
+  text-align: center;
+  font-size: 0.9em;
+  border-top: 1px solid #3a3f4a;
+  position: fixed; /* Keep fixed */
+  bottom: 0;
+  left: 0; /* Add left: 0 */
+  width: 100%; /* Use width: 100% */
+  z-index: 1000; /* Ensure it's on top */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.footer-content { max-width: 1200px; margin: 0 auto; width: 100%; }
+.footer-content p { margin: 0 0 10px 0; }
+.footer-links a { color: #ccc; text-decoration: none; margin: 0 10px; transition: color 0.2s ease; }
+.footer-links a:hover { color: #61dafb; }
+.footer-links span { color: #555; }
+
+/* --- Dashboard Styles --- */
+.dashboard-container { /* Container for the whole dashboard page content */
+  padding: 20px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto; /* Centers the container if parent (.App-content) allows */
+  box-sizing: border-box;
+}
+
+.welcome-heading { /* Style for "Welcome, Name!" */
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #61dafb;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.logout-button { /* Add styles for the logout button */
+  display: block;
+  margin: 0 auto 25px auto; /* Center button */
+  padding: 8px 20px;
+  background-color: #555; /* Example style */
   color: white;
+  border: 1px solid #777;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease;
+}
+logout-button:hover {
+  background-color: #666;
 }
 
-.App-link {
+/* Layout for Profile/Account cards */
+.dashboard-content-layout { /* Use this class name */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Card styles (Applied to profile/account <section>) */
+.card { /* This class needs to be applied to the sections */
+  background-color: #3a3f4a;
+  border-radius: 8px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #4a4f5a;
+  flex: 1;
+  min-width: 300px;
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
   color: #61dafb;
+  border-bottom: 1px solid #5a5f6a;
+  padding-bottom: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Definition List Styles within cards */
+.card dl { margin: 0; padding: 0; }
+.card dt { font-weight: bold; color: #ccc; float: left; width: 140px; clear: left; margin-bottom: 10px; padding-right: 10px; text-align: right; }
+.card dd { margin-left: 150px; margin-bottom: 10px; color: #fff; }
+.card dl::after { content: ""; display: table; clear: both; }
+
+.transactions-button { /* Style for button inside account card */
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 20px;
+  font-size: 1em;
+  font-weight: bold;
+  color: #282c34;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+.transactions-button:hover { background-color: #7cdefd; }
+.header-center {
+  flex: 2; /* Take up 2 parts (allow more space if needed) */
+  text-align: center; /* Center the H1 inside */
+}
+
+/* --- Loading / Error States --- */
+.loading-container, .error-container {
+  text-align: center;
+  padding: 40px;
+  margin-top: 30px; /* Space from potential header */
+  color: #aaa;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 8px;
+  width: 100%; /* Ensure it takes width */
+  max-width: 600px; /* Optional max width */
+  box-sizing: border-box;
+}
+
+.error-container {
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.cards-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+
+/* --- Login Page Styles --- */
+.login-page-container {
+  display: flex;
+  justify-content: center; /* Center login-box horizontally */
+  align-items: center;     /* Center login-box vertically */
+  padding: 20px;
+  width: 100%; /* Ensure it spans width */
+  box-sizing: border-box; /* Include padding in width */     
+}
+
+.login-box {
+  background-color: #3a3f4a; padding: 30px 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); text-align: center; color: white; max-width: 400px; width: 100%; margin-top:350px;
+  /* display: flex; justify-content: center; align-items: center; <-- Remove, not needed for content inside */
+}
+
+.login-box h2 { margin-top: 0; margin-bottom: 15px; color: #61dafb; }
+.login-box p { margin-bottom: 25px; color: #ccc; }
+.google-signin-button { background-color: white; color: #444; border: 1px solid #ddd; padding: 10px 20px; border-radius: 4px; font-size: 1em; font-weight: bold; cursor: pointer; display: inline-flex; align-items: center; transition: background-color 0.2s ease; width: 100%; justify-content: center; }
+.google-signin-button:hover { background-color: #f5f5f5; }
+.google-signin-button img { width: 18px; height: 18px; margin-right: 10px; }
+
+/* --- Loading / Error States --- */
+.loading, .error { text-align: center; padding: 40px; font-size: 1.2em; color: #aaa; }
+.error { color: #ff6b6b; }
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 700px) {
+  .cards-container { flex-direction: column; align-items: center; }
+  .card { width: 90%; min-width: unset; flex: unset; }
+  .card dt { width: 120px; }
+  .card dd { margin-left: 130px; }
+}
+
+@media (max-width: 600px) {
+  .header-content { flex-direction: column; align-items: flex-start; }
+  .main-nav { margin-top: 10px; }
+  .main-nav a { margin-left: 0; margin-right: 15px; }
+  .footer-links { font-size: 0.8em; }
+  .footer-links a { margin: 0 5px; }
+  .app-header, .app-footer { padding: 15px; } /* Reduce padding on small screens */
+  .login-box { padding: 20px; }
+  .App-content { padding-top: 60px; padding-bottom: 60px; } /* Adjust padding for smaller header/footer */
+
+}
+.close-button {
+  background: transparent;
+  border: none;
+  color: #aaa;
+  /* --- REDUCE FONT SIZE --- */
+  font-size: 1.4em; /* Try this value, or 1.3em / 1.5em */
+  line-height: 1;   /* Keep line height tight */
+  padding: 0 5px; /* Keep some padding for click area */
+  cursor: pointer;
+  position: absolute;
+  /* --- Maybe adjust position slightly --- */
+  top: -3px;      /* Example adjustment */
+  right: 3px;       /* Example adjustment */
+  transition: color 0.2s ease;
+}
+.close-button:hover {
+  color: #fff;
 }
