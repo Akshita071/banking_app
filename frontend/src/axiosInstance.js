@@ -1,7 +1,7 @@
 // src/axiosInstance.js (or wherever you prefer)
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:8080'; // Or process.env.REACT_APP_API_URL
+const API_BASE_URL = 'https://banking-backend-bap6.onrender.com/'; // Or process.env.REACT_APP_API_URL
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
