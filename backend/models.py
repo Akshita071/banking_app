@@ -19,7 +19,7 @@ class UserProfile(db.Model):
     __tablename__ = 'user_profile'
 
     customer_id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    google_id = db.Column(db.String(255), unique=True, nullable=False)
+    google_id = db.Column(db.String(255), unique=True, nullable=True)
     email_address = db.Column(db.String(255), unique=True, nullable=False)
     full_name = db.Column(db.String(255), nullable=True)
     address = db.Column(db.Text, nullable=True)
