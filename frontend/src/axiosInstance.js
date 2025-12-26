@@ -1,22 +1,21 @@
-// src/axiosInstance.js (or wherever you prefer)
-import axios from 'axios';
-
-const API_BASE_URL = 'https://banking-backend-bap6.onrender.com/'; // Or process.env.REACT_APP_API_URL
+import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true, // <-- The crucial setting for all requests
+  baseURL: import.meta.env.VITE_API_URL, // ✅ ENV based
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: false, // ✅ IMPORTANT
 });
 
-// Optional: Add interceptors for error handling, token refresh, etc. here
+// Optional interceptor (safe)
 axiosInstance.interceptors.response.use(
-  response => response,
-  error => {
-    console.error('Axios error:', error.response || error.message);
-    // Add global error handling if needed (e.g., redirect on 401)
-    // if (error.response && error.response.status === 401) {
-    //   // Handle logout or redirect to login
-    // }
+  (response) => response,
+  (error) => {
+    console.error(
+      "Axios error:",
+      error.response?.data || error.message
+    );
     return Promise.reject(error);
   }
 );
